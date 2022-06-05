@@ -1,0 +1,54 @@
+<div class="person-card--wrapper">
+  <ng-container *ngIf="!loading; else loadingTemplate">
+    <mat-card *ngIf="!!profile; else emptyTemplate" class="person-card">
+      <img
+        mat-card-image
+        class="person-card--photo"
+        [ngClass]="{ 'skeleton-loading': photoLoading }"
+        onload="onLoadedPhoto($event)"
+        [src]="profile?.preview_image_url"
+        alt="Photo"
+      />
+      <mat-icon *ngIf="isMatch" color="primary" class="person-card--match">favorite</mat-icon>
+      <mat-card-content>
+        <p class="person-card--title">{{ profile?.title || "" }}, {{ profile?.age || "" }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="person-card--actions">
+          <button *ngIf="!isMatch" (click)="onLike($event)" mat-raised-button color="primary">Like</button>
+          <button *ngIf="!isMatch" (click)="onDislike($event)" mat-raised-button color="accent">Dislike</button>
+          <button *ngIf="isMatch" (click)="onOkay($event)" mat-raised-button color="accent">Okay</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>
+
+<ng-template #loadingTemplate>
+  <mat-card class="person-card">
+    <div mat-card-image class="person-card--photo skeleton-loading"></div>
+    <mat-card-content>
+      <p class="person-card--title skeleton-loading"></p>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="person-card--actions">
+        <button mat-raised-button disabled color="primary" class="skeleton-loading">Like</button>
+        <button mat-raised-button disabled color="accent" class="skeleton-loading">Dislike</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
+<ng-template #emptyTemplate>
+  <mat-card class="person-card">
+    <div mat-card-image class="person-card--photo"></div>
+    <h2>No new user profiles found. Please check back later</h2>
+    <mat-card-content> </mat-card-content>
+    <mat-card-actions>
+      <div class="person-card--actions">
+        <button mat-raised-button disabled color="primary">Like</button>
+        <button mat-raised-button disabled color="accent">Dislike</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>

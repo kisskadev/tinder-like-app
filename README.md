@@ -25,3 +25,18 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Backend specification
+
+base_address: 'http://localhost:3000/'
+
+API:
+
+1. get-person-profile: request - nothing, response - information about person profile, view object
+   {
+   title: string;
+   preview_image_url: string;
+   age: number;
+   }
+
+2. like-person-profile: request - id of the user who likes, response - check by id whether there are mutual likes, return true or false
