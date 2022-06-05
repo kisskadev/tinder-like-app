@@ -14,7 +14,7 @@ app.use(bodyParser.raw());
 let counter = 0;
 app.get("/get-person-profile", (req, res) => {
   counter++;
-  if (counter < 15) {
+  if (counter < 30) {
     res.send({
       title: chance.name({ gender: "female" }),
       age: chance.age(),

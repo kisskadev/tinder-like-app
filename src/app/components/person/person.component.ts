@@ -58,7 +58,11 @@ export class PersonComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((isMatch: boolean) => {
         this.isMatch = isMatch;
-        this.cdr.markForCheck();
+        if (!this.isMatch) {
+          this.trigger$.next();
+        } else {
+          this.cdr.markForCheck();
+        }
       });
   }
 
